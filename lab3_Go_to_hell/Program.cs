@@ -1,8 +1,6 @@
-﻿using Lab3;
-
-namespace lab3_Go_to_hell
+﻿namespace lab3_Go_to_hell
 {
-    internal class Program
+    iinternal class Program
     {
         static int[][] Input()
         {
