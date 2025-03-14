@@ -4,7 +4,6 @@
     {
         static int[][] Input()
         {
-            //For testing commit
             Console.WriteLine("Введіть кількість масивів");
             int n = int.Parse(Console.ReadLine());
 
