@@ -4,6 +4,11 @@ namespace lab3_Go_to_hell
 {
     internal class Program
     {
+        public static void PrintJagged(int[][] jagged)
+        {
+            foreach (var arr in jagged) Console.WriteLine(String.Join(' ', arr));
+        }
+
         static int[][] Input()
         {
             Console.WriteLine("Введіть кількість масивів");
@@ -21,7 +26,7 @@ namespace lab3_Go_to_hell
         static byte Choice()
         {
             Console.WriteLine("Виберіть умову завдання:\n" +
-                              "1) \n" +
+                              "1) Вставити після кожного парного елемента елемент із значенням 0 \n" +
                               "2) \n" +
                               "3) \n" +
                               "0) Вийти з програми");
@@ -55,7 +60,7 @@ namespace lab3_Go_to_hell
 
                 Action action = choice switch
                 {
-                    1 => () => MakscoldSolution.Foo(jagged),
+                    1 => () => MakscoldSolution.ZeroAfterEven(jagged),
                     2 => () => Problem(),
                     3 => () => Problem(),
                     _ => () => Problem(),
