@@ -12,8 +12,7 @@ namespace Lab3
     {//15. Вставити після кожного парного елемента елемент із значенням 0
         public static void ZeroAfterEven(int[][] jagged)
         {
-            Console.WriteLine("Makscold Solution"); // Message for testing
-
+            Console.WriteLine("Початковий масив:");
             Program.PrintJagged(jagged);
 
             int[] countOfEven = CountOfEven(jagged);
@@ -31,6 +30,8 @@ namespace Lab3
                 }
             }
             jagged = result;
+
+            Console.WriteLine("Кінцевий масив:");
             Program.PrintJagged(jagged);
         }
         static int[] CountOfEven(int[][] jagged)
