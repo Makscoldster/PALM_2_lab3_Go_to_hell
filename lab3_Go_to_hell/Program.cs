@@ -1,6 +1,8 @@
-﻿namespace lab3_Go_to_hell
+﻿using Lab3;
+
+namespace lab3_Go_to_hell
 {
-    iinternal class Program
+    internal class Program
     {
         public static void PrintJagged(int[][] jagged)
         {
