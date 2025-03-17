@@ -12,37 +12,25 @@ namespace Lab3
     {//8. Знищити всі елементи з непарними індексами
         public static int[][] Menu(int[][] jagged)
         {
-            Console.WriteLine("\nMariia Solution");
-            Console.WriteLine("Ваш масив:");
+            Console.WriteLine("Початковий масив:");
             Program.PrintJagged(jagged);
 
             int choice;
             do
             {
-                Console.WriteLine("Для виконання програми через Array.Resize() введіть 1");
-                Console.WriteLine("Для виконання програми через створення нового масиву введіть 2");
-                Console.WriteLine("Щоб повернутися назад в меню введіть 0");
+                Console.WriteLine("1) Для виконання програми через Array.Resize().");
+                Console.WriteLine("2) Для виконання програми через створення нового масиву.");
+                Console.WriteLine("0) Щоб повернутися назад в меню.");
                 choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Виконую програму через Array.Resize()");
                         ArrayResizeMethod(jagged);
-
-                        Console.WriteLine("Результат виконання програми:");
-                        Program.PrintJagged(jagged);
-                        Console.WriteLine();
                         return jagged;
                     case 2:
-                        Console.WriteLine("Виконую програму через створення нового масиву");
                         jagged = CreateNewArrayMethod(jagged);
-
-                        Console.WriteLine("Результат виконання програми:");
-                        Program.PrintJagged(jagged);
-                        Console.WriteLine();
                         return jagged;
                     case 0:
-                        Console.WriteLine();
                         Program.Main();
                         break;
                     default:
@@ -54,10 +42,14 @@ namespace Lab3
         }
         static void ArrayResizeMethod(int[][] jagged)
         {
+            Console.WriteLine("Виконую програму через Array.Resize()");
 
+            Console.WriteLine("Результат виконання програми:");
+            Program.PrintJagged(jagged);
         }
         static int[][] CreateNewArrayMethod(int[][] jagged)
         {
+            Console.WriteLine("Виконую програму через створення нового масиву");
             int n = jagged.Length;
             int[][] result_jagged = new int[n][];
             int m, k;
@@ -72,6 +64,8 @@ namespace Lab3
                     result_jagged[i][k++] = jagged[i][j];
                 }
             }
+            Console.WriteLine("Кінцевий масив:");
+            Program.PrintJagged(result_jagged);
             return result_jagged;
         }
     }
