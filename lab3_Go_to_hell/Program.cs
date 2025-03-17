@@ -6,7 +6,26 @@ namespace lab3_Go_to_hell
     {
         public static void PrintJagged(int[][] jagged)
         {
-            foreach (var arr in jagged) Console.WriteLine(String.Join(' ', arr));
+            int maxLength = 0;
+            int n = jagged.Length;
+            int m = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                m = jagged[i].Length;
+                for (int j = 0; j < m; ++j)
+                {
+                    int length = jagged[i][j].ToString().Length;
+                    if (length > maxLength)
+                        maxLength = length;
+                }
+            }
+            for (int i = 0; i < n; ++i)
+            {
+                m = jagged[i].Length;
+                for (int j = 0; j < m; ++j)
+                    Console.Write(jagged[i][j].ToString().PadLeft(maxLength + 1));
+                Console.WriteLine();
+            }
         }
 
         static int[][] Input()
