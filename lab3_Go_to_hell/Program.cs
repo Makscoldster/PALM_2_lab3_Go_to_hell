@@ -119,7 +119,7 @@ namespace lab3_Go_to_hell
             Console.WriteLine("Спробуйте ще раз");
             return new int[0][];
         }
-        static void Main(string[] args)
+        public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
@@ -128,7 +128,7 @@ namespace lab3_Go_to_hell
                 //bool create = true;
                 Console.WriteLine("Виберіть умову завдання:\n" +
                                   "1) Вставити після кожного парного елемента елемент із значенням 0 \n" +
-                                  "2) \n" +
+                                  "2) Знищити всі елементи з непарними індексами\n" +
                                   "3) \n" +
                                   "0) Вийти з програми");
 
@@ -140,7 +140,7 @@ namespace lab3_Go_to_hell
                 Action action = choiceBlock switch
                 {
                     1 => () => MakscoldSolution.ZeroAfterEven(jagged),
-                    2 => () => ShowProblemMessage(),
+                    2 => () => MariiaSolution.Menu(jagged),
                     3 => () => ShowProblemMessage(),
                     _ => () => ShowProblemMessage(),
                 };
