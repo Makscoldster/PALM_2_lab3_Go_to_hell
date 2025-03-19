@@ -6,7 +6,26 @@ namespace lab3_Go_to_hell
     {
         public static void PrintJagged(int[][] jagged)
         {
-            foreach (var arr in jagged) Console.WriteLine(String.Join(' ', arr));
+            int maxLength = 0;
+            int n = jagged.Length;
+            int m = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                m = jagged[i].Length;
+                for (int j = 0; j < m; ++j)
+                {
+                    int length = jagged[i][j].ToString().Length;
+                    if (length > maxLength)
+                        maxLength = length;
+                }
+            }
+            for (int i = 0; i < n; ++i)
+            {
+                m = jagged[i].Length;
+                for (int j = 0; j < m; ++j)
+                    Console.Write(jagged[i][j].ToString().PadLeft(maxLength + 1));
+                Console.WriteLine();
+            }
         }
 
         static int[][] Input()
@@ -21,18 +40,21 @@ namespace lab3_Go_to_hell
 
             byte ChoiceMethod = Choice(3);
 
-            uint n;
-            do
+            uint n = 0;
+            if (ChoiceMethod != 3)
             {
-                try
+                do
                 {
-                    Console.WriteLine("Введіть кількість масивів");
-                    n = uint.Parse(Console.ReadLine());
-                    break;
+                    try
+                    {
+                        Console.WriteLine("Введіть кількість масивів");
+                        n = uint.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch { ShowProblemMessage(); }
                 }
-                catch { ShowProblemMessage(); }
+                while (true);
             }
-            while (true);
 
             int[][] jagged;
 
@@ -40,7 +62,7 @@ namespace lab3_Go_to_hell
             {
                 1 => () => InputInSingleLine(n),
                 2 => () => InputRamdomly(n),
-                3 => () => ShowProblemMessageWithReturn(),
+                3 => () => InputFromFile(),
                 _ => () => ShowProblemMessageWithReturn(),
             };
 
@@ -79,8 +101,6 @@ namespace lab3_Go_to_hell
 
                 } while (minRange > maxRange);
 
-
-
                 Random rndGen = new Random();
 
                 int[][] jagged = new int[n][];
@@ -94,6 +114,24 @@ namespace lab3_Go_to_hell
                 //Console.WriteLine("Згенерована матриця:");
                 //PrintJagged(jagged);
 
+                return jagged;
+            }
+
+            static int[][] InputFromFile()
+            {
+                List<int[]> jaggedList = new List<int[]>();
+                StreamReader file = new StreamReader("input.txt");
+                string line;
+                while ((line = file.ReadLine()) != null)
+                {
+                    int[] row = Array.ConvertAll(line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                    jaggedList.Add(row);
+                }
+                int[][] jagged = new int[jaggedList.Count][];
+                for (int i = 0; i < jaggedList.Count; i++)
+                {
+                    jagged[i] = jaggedList[i];
+                }
                 return jagged;
             }
 
