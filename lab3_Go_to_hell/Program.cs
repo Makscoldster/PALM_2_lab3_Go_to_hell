@@ -129,7 +129,7 @@ namespace lab3_Go_to_hell
                 Console.WriteLine("Виберіть умову завдання:\n" +
                                   "1) Вставити після кожного парного елемента елемент із значенням 0 \n" +
                                   "2) Знищити всі елементи з непарними індексами\n" +
-                                  "3) \n" +
+                                  "3) Вставити К елементів, починаючи з номеру T\n" +
                                   "0) Вийти з програми");
 
                 byte choiceBlock = Choice(3);
@@ -141,7 +141,7 @@ namespace lab3_Go_to_hell
                 {
                     1 => () => MakscoldSolution.ZeroAfterEven(jagged),
                     2 => () => MariiaSolution.Menu(jagged),
-                    3 => () => ShowProblemMessage(),
+                    3 => () => Jenlast_Solution.InsertElements(jagged),
                     _ => () => ShowProblemMessage(),
                 };
                 action();
