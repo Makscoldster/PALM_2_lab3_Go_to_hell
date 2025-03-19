@@ -11,6 +11,7 @@ namespace Lab3
     {
         public static void InsertElements(int[][] jagged)
         {
+            // boba
             Console.WriteLine("Початковий масив:");
             Program.PrintJagged(jagged);
 
