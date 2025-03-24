@@ -61,7 +61,7 @@ namespace lab3_Go_to_hell
             switch (ChoiceMethod)
             {
                 case 1:
-                    jagged = InputInSingleLine();
+                    jagged = InputInSingleLine(n);
                     break;
                 case 2:
                     jagged = InputRamdomly(n);
@@ -187,13 +187,13 @@ namespace lab3_Go_to_hell
                     switch (choiceBlock)
                     {
                         case 1:
-                            MakscoldSolution.ZeroAfterEven(jagged)();
+                            MakscoldSolution.ZeroAfterEven(jagged);
                             break;
                         case 2:
-                            MariiaSolution.Menu(jagged)();
+                            MariiaSolution.Menu(jagged);
                             break;
                         case 3:
-                            Jenlast_Solution.InsertElements(jagged)();
+                            Jenlast_Solution.InsertElements(jagged);
                             break;
                         default:
                             ShowProblemMessage();
