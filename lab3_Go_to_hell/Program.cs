@@ -68,7 +68,7 @@ namespace lab3_Go_to_hell
                     break;
                 case 3:
                     jagged = InputFromFile();
-                    break
+                    break;
                 default:
                     jagged = ShowProblemMessageWithReturn();
                     break;
@@ -202,7 +202,7 @@ namespace lab3_Go_to_hell
 
                     wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
                 }
-                while (wantNewMatrix)
+                while (wantNewMatrix);
             } while (true);
 
         }
