@@ -1,4 +1,4 @@
-﻿using Lab3;
+using Lab3;
 
 namespace lab3_Go_to_hell
 {
@@ -58,15 +58,21 @@ namespace lab3_Go_to_hell
 
             int[][] jagged;
 
-            Func<int[][]> action = ChoiceMethod switch
+            switch (ChoiceMethod)
             {
-                1 => () => InputInSingleLine(n),
-                2 => () => InputRamdomly(n),
-                3 => () => InputFromFile(),
-                _ => () => ShowProblemMessageWithReturn(),
-            };
-
-            jagged = action();
+                case 1:
+                    jagged = InputInSingleLine();
+                    break;
+                case 2:
+                    jagged = InputRamdomly(n);
+                    break;
+                case 3:
+                    jagged = InputFromFile();
+                    break;
+                default:
+                    jagged = ShowProblemMessageWithReturn();
+                    break;
+            }
 
             static int[][] InputInSingleLine(uint n)
             {
@@ -174,24 +180,50 @@ namespace lab3_Go_to_hell
                 if (choiceBlock == 0) return;
 
                 int[][] jagged = Input();
+                bool wantNewMatrix;
 
-                Action action = choiceBlock switch
+                do
                 {
-                    1 => () => MakscoldSolution.ZeroAfterEven(jagged),
-                    2 => () => MariiaSolution.Menu(jagged),
-                    3 => () => Jenlast_Solution.InsertElements(jagged),
-                    _ => () => ShowProblemMessage(),
-                };
-                action();
-
-                //Console.WriteLine("Ввести нову матрицю?\n" +
-                //                  "1) Так\n" +
-                //                  "Other) Ні");
-
-
-
+                    switch (choiceBlock)
+                    {
+                        case 1:
+                            MakscoldSolution.ZeroAfterEven(jagged)();
+                            break;
+                        case 2:
+                            MariiaSolution.Menu(jagged)();
+                            break;
+                        case 3:
+                            Jenlast_Solution.InsertElements(jagged)();
+                            break;
+                        default:
+                            ShowProblemMessage();
+                            break;
+                    }
+                    wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
+                }
+                while (wantNewMatrix);
             } while (true);
 
+        }
+
+        static bool AskForNewMatrix()
+        {
+            Console.WriteLine(
+                """
+                Ввести нову матрицю?
+                  1) Так
+                  Other) Ні
+                """);
+
+            try
+            {
+                byte input = byte.Parse(Console.ReadLine());
+                return input == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
