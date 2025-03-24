@@ -1,4 +1,4 @@
-﻿using Lab3;
+using Lab3;
 
 namespace lab3_Go_to_hell
 {
@@ -199,7 +199,6 @@ namespace lab3_Go_to_hell
                             ShowProblemMessage();
                             break;
                     }
-
                     wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
                 }
                 while (wantNewMatrix);
