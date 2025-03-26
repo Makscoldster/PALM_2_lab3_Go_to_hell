@@ -15,19 +15,27 @@ namespace Lab3
             Console.WriteLine("Початковий масив:");
             Program.PrintJagged(jagged);
 
-            input:
+            int k, rowIndex, coloumn;
+            do
+            {
                 Console.Write("Введіть кількість елементів яку потрібно вставити в масив: ");
-                int k = int.Parse(Console.ReadLine());
+                k = int.Parse(Console.ReadLine());
                 Console.Write("Введіть номер рядка масиву, в якому будуть вставлятись елементи (рахунок починається з 0): ");
-                int rowIndex = int.Parse(Console.ReadLine());
+                rowIndex = int.Parse(Console.ReadLine());
                 Console.Write("Введіть номер елементу починаючи з якого будуть вставлятись елементи: ");
-                int coloumn = int.Parse(Console.ReadLine());
+                coloumn = int.Parse(Console.ReadLine());
 
-                if (rowIndex < 0 || rowIndex >= jagged.Length || coloumn < 0 || coloumn >= jagged[rowIndex].Length)
+                if (rowIndex < 0 || rowIndex >= jagged.Length)
                 {
-                    Console.WriteLine("Некоректні вхідні дані");
-                    goto input;
+                    Console.WriteLine("Некоректно введено номер рядка");
                 }
+                else if (coloumn < 0 || coloumn >= jagged[rowIndex].Length)
+                {
+                    Console.WriteLine("Некоректно введено номер елементу");
+                }
+                else break;
+
+            } while (true);
 
             int[] row = jagged[rowIndex];
 
@@ -38,14 +46,18 @@ namespace Lab3
                 row[i] = row[i - k];
             }
 
-            newnuminput:
+            string[] new_nums;
+            do
+            {
                 Console.Write($"Введіть нові елементи, які додадуться до масиву після {coloumn} елементу: ");
-                string[] new_nums = Console.ReadLine().Split();
+                new_nums = Console.ReadLine().Split();
                 if (new_nums.Length > k)
                 {
                     Console.WriteLine("Значення кількості елементів, які потрібно вставити та сама кількість елементів не співпадають, спробуйте ще раз.");
-                    goto newnuminput;
                 }
+                else break;
+
+            } while (true);
 
             for (int i = 0; i < k; i++)
             {
