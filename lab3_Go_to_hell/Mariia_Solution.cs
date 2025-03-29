@@ -43,7 +43,15 @@ namespace Lab3
         static void ArrayResizeMethod(int[][] jagged)
         {
             Console.WriteLine("Виконую програму через Array.Resize()");
-
+            for (int i = 0; i < jagged.Length; i++)
+            {
+                int k = 0;
+                for (int j = 0; j < jagged[i].Length; j += 2)
+                {
+                    jagged[i][k++] = jagged[i][j];
+                }
+                Array.Resize(ref jagged[i], k);
+            }
             Console.WriteLine("Результат виконання програми:");
             Program.PrintJagged(jagged);
         }
@@ -57,8 +65,7 @@ namespace Lab3
             {
                 m = jagged[i].Length;
                 k = 0;
-                if (m%2 == 0) result_jagged[i] = new int[m / 2];
-                else result_jagged[i] = new int[m / 2 + 1];
+                result_jagged[i] = new int[(m+1) / 2];
                 for (int j = 0; j < m; j+=2)
                 {
                     result_jagged[i][k++] = jagged[i][j];
