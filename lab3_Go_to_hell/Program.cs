@@ -122,7 +122,6 @@ namespace lab3_Go_to_hell
 
                 return jagged;
             }
-
             static int[][] InputFromFile()
             {
                 List<int[]> jaggedList = new List<int[]>();
@@ -167,6 +166,8 @@ namespace lab3_Go_to_hell
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
+            bool wantNewMatrix = true;
+            int[][] jagged = null;
             do
             {
                 //bool create = true;
@@ -178,34 +179,26 @@ namespace lab3_Go_to_hell
 
                 byte choiceBlock = Choice(3);
                 if (choiceBlock == 0) return;
+                if (wantNewMatrix) jagged = Input();
 
-                int[][] jagged = Input();
-                bool wantNewMatrix;
-
-                do
+                switch (choiceBlock)
                 {
-                    switch (choiceBlock)
-                    {
-                        case 1:
-                            MakscoldSolution.ZeroAfterEven(jagged);
-                            break;
-                        case 2:
-                            MariiaSolution.Menu(jagged);
-                            break;
-                        case 3:
-                            Jenlast_Solution.InsertElements(jagged);
-                            break;
-                        default:
-                            ShowProblemMessage();
-                            break;
-                    }
-                    wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
+                    case 1:
+                        MakscoldSolution.ZeroAfterEven(jagged);
+                        break;
+                    case 2:
+                        jagged = MariiaSolution.Menu(jagged);
+                        break;
+                    case 3:
+                        Jenlast_Solution.InsertElements(jagged);
+                        break;
+                    default:
+                        ShowProblemMessage();
+                        break;
                 }
-                while (wantNewMatrix);
+                wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
             } while (true);
-
         }
-
         static bool AskForNewMatrix()
         {
             Console.WriteLine(
