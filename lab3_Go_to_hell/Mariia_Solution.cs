@@ -26,7 +26,6 @@ namespace Lab3
                 {
                     case 1:
                         ArrayResizeMethod(ref array);
-                        OneDimensionalArray.PrintArray(array);
                         return array;
                     case 2:
                         array = CreateNewArrayMethod(array);

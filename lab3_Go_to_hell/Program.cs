@@ -31,8 +31,8 @@ namespace lab3_Go_to_hell
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
             bool wantNewMatrix = true;
-            int[][] jagged = null;
-            int[] array = null;
+            int[][] jagged = null!;
+            int[] array = null!;
             do
             {
                 //bool create = true;
