@@ -1,4 +1,4 @@
-﻿using Lab3;
+using Lab3;
 
 namespace lab3_Go_to_hell
 {
@@ -6,7 +6,26 @@ namespace lab3_Go_to_hell
     {
         public static void PrintJagged(int[][] jagged)
         {
-            foreach (var arr in jagged) Console.WriteLine(String.Join(' ', arr));
+            int maxLength = 0;
+            int n = jagged.Length;
+            int m = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                m = jagged[i].Length;
+                for (int j = 0; j < m; ++j)
+                {
+                    int length = jagged[i][j].ToString().Length;
+                    if (length > maxLength)
+                        maxLength = length;
+                }
+            }
+            for (int i = 0; i < n; ++i)
+            {
+                m = jagged[i].Length;
+                for (int j = 0; j < m; ++j)
+                    Console.Write(jagged[i][j].ToString().PadLeft(maxLength + 1));
+                Console.WriteLine();
+            }
         }
 
         static int[][] Input()
@@ -20,31 +39,39 @@ namespace lab3_Go_to_hell
 
 
             byte ChoiceMethod = Choice(3);
-
-            uint n;
-            do
+            uint n = 0;
+            if (ChoiceMethod != 3)
             {
-                try
+                do
                 {
-                    Console.WriteLine("Введіть кількість масивів");
-                    n = uint.Parse(Console.ReadLine());
-                    break;
+                    try
+                    {
+                        Console.WriteLine("Введіть кількість масивів");
+                        n = uint.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch { ShowProblemMessage(); }
                 }
-                catch { ShowProblemMessage(); }
+                while (true);
             }
-            while (true);
 
-            int[][] jagged;
+            int[][] jagged = null;
 
-            Func<int[][]> action = ChoiceMethod switch
+            switch (ChoiceMethod)
             {
-                1 => () => InputInSingleLine(n),
-                2 => () => InputRamdomly(n),
-                3 => () => ShowProblemMessageWithReturn(),
-                _ => () => ShowProblemMessageWithReturn(),
-            };
-
-            jagged = action();
+                case 1:
+                    jagged = InputInSingleLine(n);
+                    break;
+                case 2:
+                    jagged = InputRamdomly(n);
+                    break;
+                case 3:
+                    jagged = InputFromFile();
+                    break;
+                default:
+                    ShowProblemMessage();
+                    break;
+            }
 
             static int[][] InputInSingleLine(uint n)
             {
@@ -79,8 +106,6 @@ namespace lab3_Go_to_hell
 
                 } while (minRange > maxRange);
 
-
-
                 Random rndGen = new Random();
 
                 int[][] jagged = new int[n][];
@@ -94,6 +119,23 @@ namespace lab3_Go_to_hell
                 //Console.WriteLine("Згенерована матриця:");
                 //PrintJagged(jagged);
 
+                return jagged;
+            }
+            static int[][] InputFromFile()
+            {
+                List<int[]> jaggedList = new List<int[]>();
+                StreamReader file = new StreamReader("input.txt");
+                string line;
+                while ((line = file.ReadLine()) != null)
+                {
+                    int[] row = Array.ConvertAll(line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                    jaggedList.Add(row);
+                }
+                int[][] jagged = new int[jaggedList.Count][];
+                for (int i = 0; i < jaggedList.Count; i++)
+                {
+                    jagged[i] = jaggedList[i];
+                }
                 return jagged;
             }
 
@@ -114,46 +156,61 @@ namespace lab3_Go_to_hell
             } while (true);
         }
         static void ShowProblemMessage() => Console.WriteLine("Спробуйте ще раз");
-        static int[][] ShowProblemMessageWithReturn()
-        {
-            Console.WriteLine("Спробуйте ще раз");
-            return new int[0][];
-        }
         public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
+            bool wantNewMatrix = true;
+            int[][] jagged = null;
             do
             {
                 //bool create = true;
                 Console.WriteLine("Виберіть умову завдання:\n" +
                                   "1) Вставити після кожного парного елемента елемент із значенням 0 \n" +
                                   "2) Знищити всі елементи з непарними індексами\n" +
-                                  "3) \n" +
+                                  "3) Вставити К елементів, починаючи з номеру T\n" +
                                   "0) Вийти з програми");
 
                 byte choiceBlock = Choice(3);
                 if (choiceBlock == 0) return;
+                if (wantNewMatrix) jagged = Input();
 
-                int[][] jagged = Input();
-
-                Action action = choiceBlock switch
+                switch (choiceBlock)
                 {
-                    1 => () => MakscoldSolution.ZeroAfterEven(jagged),
-                    2 => () => MariiaSolution.Menu(jagged),
-                    3 => () => ShowProblemMessage(),
-                    _ => () => ShowProblemMessage(),
-                };
-                action();
-
-                //Console.WriteLine("Ввести нову матрицю?\n" +
-                //                  "1) Так\n" +
-                //                  "Other) Ні");
-
-
-
+                    case 1:
+                        MakscoldSolution.ZeroAfterEven(jagged);
+                        break;
+                    case 2:
+                        jagged = MariiaSolution.Menu(jagged);
+                        break;
+                    case 3:
+                        Jenlast_Solution.InsertElements(jagged);
+                        break;
+                    default:
+                        ShowProblemMessage();
+                        break;
+                }
+                wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
             } while (true);
+        }
+        static bool AskForNewMatrix()
+        {
+            Console.WriteLine(
+                """
+                Ввести нову матрицю?
+                  1) Так
+                  Other) Ні
+                """);
 
+            try
+            {
+                byte input = byte.Parse(Console.ReadLine());
+                return input == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
