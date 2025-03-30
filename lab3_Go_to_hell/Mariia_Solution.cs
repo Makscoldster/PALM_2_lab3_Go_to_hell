@@ -60,11 +60,10 @@ namespace Lab3
             Console.WriteLine("Виконую програму через створення нового масиву");
             int n = jagged.Length;
             int[][] result_jagged = new int[n][];
-            int m, k;
             for (int i = 0; i < n; i++)
             {
-                m = jagged[i].Length;
-                k = 0;
+                int m = jagged[i].Length;
+                int k = 0;
                 result_jagged[i] = new int[(m+1) / 2];
                 for (int j = 0; j < m; j+=2)
                 {
