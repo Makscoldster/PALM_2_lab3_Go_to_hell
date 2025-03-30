@@ -39,7 +39,6 @@ namespace lab3_Go_to_hell
 
 
             byte ChoiceMethod = Choice(3);
-
             uint n = 0;
             if (ChoiceMethod != 3)
             {
@@ -56,7 +55,7 @@ namespace lab3_Go_to_hell
                 while (true);
             }
 
-            int[][] jagged;
+            int[][] jagged = null;
 
             switch (ChoiceMethod)
             {
@@ -70,7 +69,7 @@ namespace lab3_Go_to_hell
                     jagged = InputFromFile();
                     break;
                 default:
-                    jagged = ShowProblemMessageWithReturn();
+                    ShowProblemMessage();
                     break;
             }
 
@@ -157,11 +156,6 @@ namespace lab3_Go_to_hell
             } while (true);
         }
         static void ShowProblemMessage() => Console.WriteLine("Спробуйте ще раз");
-        static int[][] ShowProblemMessageWithReturn()
-        {
-            Console.WriteLine("Спробуйте ще раз");
-            return new int[0][];
-        }
         public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
