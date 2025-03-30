@@ -70,9 +70,10 @@ namespace Lab3
                     result_jagged[i][k++] = jagged[i][j];
                 }
             }
+            jagged = result_jagged;
             Console.WriteLine("Кінцевий масив:");
-            Program.PrintJagged(result_jagged);
-            return result_jagged;
+            Program.PrintJagged(jagged);
+            return jagged;
         }
     }
 }

@@ -39,7 +39,6 @@ namespace lab3_Go_to_hell
 
 
             byte ChoiceMethod = Choice(3);
-
             uint n = 0;
             if (ChoiceMethod != 3)
             {
@@ -56,7 +55,7 @@ namespace lab3_Go_to_hell
                 while (true);
             }
 
-            int[][] jagged;
+            int[][] jagged = null;
 
             switch (ChoiceMethod)
             {
@@ -70,7 +69,7 @@ namespace lab3_Go_to_hell
                     jagged = InputFromFile();
                     break;
                 default:
-                    jagged = ShowProblemMessageWithReturn();
+                    ShowProblemMessage();
                     break;
             }
 
@@ -122,7 +121,6 @@ namespace lab3_Go_to_hell
 
                 return jagged;
             }
-
             static int[][] InputFromFile()
             {
                 List<int[]> jaggedList = new List<int[]>();
@@ -158,15 +156,12 @@ namespace lab3_Go_to_hell
             } while (true);
         }
         static void ShowProblemMessage() => Console.WriteLine("Спробуйте ще раз");
-        static int[][] ShowProblemMessageWithReturn()
-        {
-            Console.WriteLine("Спробуйте ще раз");
-            return new int[0][];
-        }
         public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
+            bool wantNewMatrix = true;
+            int[][] jagged = null;
             do
             {
                 //bool create = true;
@@ -178,34 +173,26 @@ namespace lab3_Go_to_hell
 
                 byte choiceBlock = Choice(3);
                 if (choiceBlock == 0) return;
+                if (wantNewMatrix) jagged = Input();
 
-                int[][] jagged = Input();
-                bool wantNewMatrix;
-
-                do
+                switch (choiceBlock)
                 {
-                    switch (choiceBlock)
-                    {
-                        case 1:
-                            MakscoldSolution.ZeroAfterEven(jagged);
-                            break;
-                        case 2:
-                            MariiaSolution.Menu(jagged);
-                            break;
-                        case 3:
-                            Jenlast_Solution.InsertElements(jagged);
-                            break;
-                        default:
-                            ShowProblemMessage();
-                            break;
-                    }
-                    wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
+                    case 1:
+                        MakscoldSolution.ZeroAfterEven(jagged);
+                        break;
+                    case 2:
+                        jagged = MariiaSolution.Menu(jagged);
+                        break;
+                    case 3:
+                        Jenlast_Solution.InsertElements(jagged);
+                        break;
+                    default:
+                        ShowProblemMessage();
+                        break;
                 }
-                while (wantNewMatrix);
+                wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
             } while (true);
-
         }
-
         static bool AskForNewMatrix()
         {
             Console.WriteLine(
