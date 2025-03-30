@@ -22,7 +22,7 @@ namespace Lab3
                 k = int.Parse(Console.ReadLine());
                 Console.Write("Введіть номер рядка масиву, в якому будуть вставлятись елементи (рахунок починається з 0): ");
                 rowIndex = int.Parse(Console.ReadLine());
-                Console.Write("Введіть номер елементу починаючи з якого будуть вставлятись елементи: ");
+                Console.Write("Введіть номер елементу починаючи з якого будуть вставлятись елементи (рахунок починається з 0): ");
                 coloumn = int.Parse(Console.ReadLine());
 
                 if (rowIndex < 0 || rowIndex >= jagged.Length)
@@ -61,7 +61,7 @@ namespace Lab3
 
             for (int i = 0; i < k; i++)
             {
-                row[coloumn + i] = int.Parse(new_nums[i]);
+                row[coloumn + i + 1] = int.Parse(new_nums[i]);
             }
 
             jagged[rowIndex] = row;
