@@ -80,7 +80,7 @@ namespace lab3_Go_to_hell
                         //Jenlast_Solution.InsertElements(array);
                         break;
                     case 4:
-                        MakscoldSolution.TestZeroAfterEven(ref jagged);
+                        MakscoldSolution.SplitLine(ref jagged);
                         break;
                     case 5:
                         MariiaSolution.FindMinElement(ref jagged);

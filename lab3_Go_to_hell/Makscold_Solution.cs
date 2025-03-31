@@ -10,8 +10,14 @@ namespace Lab3
 {
     public static class MakscoldSolution
     {//15. Вставити після кожного парного елемента елемент із значенням 0
-        public static void TestZeroAfterEven(ref int[][] jagged)
+        public static void SplitLine(ref int[][] jagged)
         {
+            Console.WriteLine(
+            """
+            ------------------------------------------------------------------------------------------------------------------------
+                                                          MAKSCOLD SOLUTION (БЛОК #2)
+            ------------------------------------------------------------------------------------------------------------------------
+            """);
             Console.WriteLine("Початковий масив:");
             JaggedArray.PrintJagged(jagged);
 
@@ -19,7 +25,14 @@ namespace Lab3
 
             int[][] result = new int[jagged.Length][];
 
-            for (int i = 0; i < result.Length; i++)
+            Array.Copy(jagged[0], 0, firstPart, 0, splitIndex);
+            Array.Copy(jagged[0], splitIndex, secondPart, 0, firstLineLength - splitIndex);
+
+            int[][] result = new int[jagged.Length + 1][];
+            result[0] = firstPart;
+            result[1] = secondPart;
+
+            for (int i = 1; i < jagged.Length; i++)
             {
                 result[i] = new int[jagged[i].Length + countOfEven[i]]; // Initialize the inner array
                 int indexOfJagged = 0;
@@ -29,6 +42,7 @@ namespace Lab3
                     if (result[i][j] % 2 == 0 && j + 1 < result[i].Length) result[i][++j] = 0;
                 }
             }
+
             jagged = result;
 
             Console.WriteLine("Кінцевий масив:");
