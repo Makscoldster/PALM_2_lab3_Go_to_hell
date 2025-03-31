@@ -10,8 +10,14 @@ namespace Lab3
 {
     public static class MakscoldSolution
     {//15. Вставити після кожного парного елемента елемент із значенням 0
-        public static void TestZeroAfterEven(ref int[][] jagged)
+        public static void SplitLine(ref int[][] jagged)
         {
+            Console.WriteLine(
+            """
+            ------------------------------------------------------------------------------------------------------------------------
+                                                          MAKSCOLD SOLUTION (БЛОК #2)
+            ------------------------------------------------------------------------------------------------------------------------
+            """);
             Console.WriteLine("Початковий масив:");
             JaggedArray.PrintJagged(jagged);
 
