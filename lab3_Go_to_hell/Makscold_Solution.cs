@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace Lab3
 {
     public static class MakscoldSolution
-    {//15. Вставити після кожного парного елемента елемент із значенням 0
-        public static void SplitLine(ref int[][] jagged)
+    {//15. Розбити перший рядок (при довжині >10 символів) на 2 (1-й коротший, якщо довжина непарна). Зсунути решту рядків вниз.
+        public static void Block_2_Taks_15(ref int[][] jagged)
         {
             Console.WriteLine(
             """
@@ -21,50 +21,35 @@ namespace Lab3
             Console.WriteLine("Початковий масив:");
             JaggedArray.PrintJagged(jagged);
 
-            int[] countOfEven = TestCountOfEven(jagged);
-
-            int[][] result = new int[jagged.Length][];
-
-            //Array.Copy(jagged[0], 0, firstPart, 0, splitIndex);
-            //Array.Copy(jagged[0], splitIndex, secondPart, 0, firstLineLength - splitIndex);
-
-            //int[][] result = new int[jagged.Length + 1][];
-            //result[0] = firstPart;
-            //result[1] = secondPart;
-
-            for (int i = 1; i < jagged.Length; i++)
+            if (jagged[0].Length > 10)
             {
-                result[i] = new int[jagged[i].Length + countOfEven[i]]; // Initialize the inner array
-                int indexOfJagged = 0;
-                for (int j = 0; j < result[i].Length; j++)
-                {
-                    result[i][j] = jagged[i][indexOfJagged++];
-                    if (result[i][j] % 2 == 0 && j + 1 < result[i].Length) result[i][++j] = 0;
-                }
-            }
+                int firstLineLength = jagged[0].Length;
+                int splitIndex = (firstLineLength) / 2;
 
-            jagged = result;
+                int[] firstPart = new int[splitIndex];
+                int[] secondPart = new int[firstLineLength - splitIndex];
+
+                Array.Copy(jagged[0], 0, firstPart, 0, splitIndex);
+                Array.Copy(jagged[0], splitIndex, secondPart, 0, firstLineLength - splitIndex);
+
+                int[][] result = new int[jagged.Length + 1][];
+                result[0] = firstPart;
+                result[1] = secondPart;
+
+
+                for (int i = 1; i < jagged.Length; i++)
+                {
+                    result[i + 1] = jagged[i];
+                }
+
+                jagged = result;
+            }
 
             Console.WriteLine("Кінцевий масив:");
             JaggedArray.PrintJagged(jagged);
         }
-        static int[] TestCountOfEven(int[][] jagged)
-        {
-            int[] countOfEven = new int[jagged.Length];
-            for (int i = 0; i < jagged.Length; i++)
-            {
-                int count = 0;
-                for (int j = 0; j < jagged[i].Length; j++)
-                {
-                    if (jagged[i][j] % 2 == 0) count++;
-                }
-                countOfEven[i] = count;
-            }
-            return countOfEven;
-        }
-
         //15. Вставити після кожного парного елемента елемент із значенням 0
-        public static void ZeroAfterEven(ref int[] array)
+        public static void Block_1_Taks_15(ref int[] array)
         {
             Console.WriteLine(
             """
