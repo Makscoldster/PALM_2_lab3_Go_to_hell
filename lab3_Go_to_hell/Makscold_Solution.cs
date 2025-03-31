@@ -36,6 +36,7 @@ namespace Lab3
                 result[0] = firstPart;
                 result[1] = secondPart;
 
+
                 for (int i = 1; i < jagged.Length; i++)
                 {
                     result[i + 1] = jagged[i];
