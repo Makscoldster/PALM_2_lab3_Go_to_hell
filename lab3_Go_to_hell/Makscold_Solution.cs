@@ -21,21 +21,26 @@ namespace Lab3
             Console.WriteLine("Початковий масив:");
             JaggedArray.PrintJagged(jagged);
 
-            if (jagged[0].Length > 10)
+            int firstLineLength = jagged[0].Length;
+            if (firstLineLength > 10)
             {
-                int firstLineLength = jagged[0].Length;
                 int splitIndex = (firstLineLength) / 2;
 
                 int[] firstPart = new int[splitIndex];
                 int[] secondPart = new int[firstLineLength - splitIndex];
 
-                Array.Copy(jagged[0], 0, firstPart, 0, splitIndex);
-                Array.Copy(jagged[0], splitIndex, secondPart, 0, firstLineLength - splitIndex);
+                for (int i = 0; i < splitIndex; i++)
+                {
+                    firstPart[i] = jagged[0][i];
+                }
+                for (int i = splitIndex; i < firstLineLength; i++)
+                {
+                    secondPart[i - splitIndex] = jagged[0][i];
+                }
 
                 int[][] result = new int[jagged.Length + 1][];
                 result[0] = firstPart;
                 result[1] = secondPart;
-
 
                 for (int i = 1; i < jagged.Length; i++)
                 {
@@ -49,7 +54,7 @@ namespace Lab3
             JaggedArray.PrintJagged(jagged);
         }
         //15. Вставити після кожного парного елемента елемент із значенням 0
-        public static void Block_1_Taks_15(ref int[] array)
+        public static void Block_1_Task_15(ref int[] array)
         {
             Console.WriteLine(
             """

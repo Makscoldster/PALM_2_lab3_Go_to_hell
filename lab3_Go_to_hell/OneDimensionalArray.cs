@@ -89,10 +89,7 @@ namespace lab3_Go_to_hell
             catch (Exception ex)
             {
                 Console.WriteLine("Помилка при читанні файлу: " + ex.Message);
-                //return new int[0];
-                #pragma warning disable IDE0301
                 return Array.Empty<int>();
-                #pragma warning restore IDE0301
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Lab3
 {
     internal class Jenlast_Solution
     {
-        public static void InsertElements(int[] array)
+        public static void Block_1_Task_12(ref int[] array)
         {
             Console.WriteLine(
             """
@@ -32,7 +32,7 @@ namespace Lab3
 
                 if (t < 0 || t >= array.Length)
                 {
-                    Console.WriteLine("Некоректні введено номер елементу");
+                    Program.ShowProblemMessage();
                 }
                 else break;
 
@@ -66,7 +66,7 @@ namespace Lab3
             Console.WriteLine("Кінцевий масив:");
             OneDimensionalArray.PrintArray(array);
         }
-        public static void DeleteRowsFromK1ToK2(int[][] jagged)
+        public static void Block_2_Task_4(int[][] jagged)
         {
             Console.WriteLine(
             """
@@ -88,7 +88,7 @@ namespace Lab3
 
                 if (k1 < 0 || k1 > jagged.Length - 1)
                 {
-                    Console.WriteLine("Некоректно введено номер першого рядка");
+                    Program.ShowProblemMessage();
                 }
                 else if (k2 < 0 || k2 > jagged.Length - 1)
                 {

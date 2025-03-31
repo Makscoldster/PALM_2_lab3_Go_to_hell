@@ -13,7 +13,7 @@ namespace Lab3
     public static class MariiaSolution
     {
         //8. Знищити всі елементи з непарними індексами
-        public static int[] Menu(int[] array)
+        public static void Block_1_Task_8(ref int[] array)
         {
             Console.WriteLine(
             """
@@ -38,10 +38,10 @@ namespace Lab3
                 {
                     case 1:
                         ArrayResizeMethod(ref array);
-                        return array;
+                        break;
                     case 2:
-                        array = CreateNewArrayMethod(array);
-                        return array;
+                        CreateNewArrayMethod(ref array);
+                        break;
                     case 0:
                         Program.Main();
                         break;
@@ -50,7 +50,6 @@ namespace Lab3
                         break;
                 }
             } while (choice != 0);
-            return array;
         }
         static void ArrayResizeMethod(ref int[] array)
         {
@@ -65,7 +64,7 @@ namespace Lab3
             Console.WriteLine("Результат виконання програми:");
             OneDimensionalArray.PrintArray(array);
         }
-        static int[] CreateNewArrayMethod(int[] array)
+        static void CreateNewArrayMethod(ref int[] array)
         {
             Console.WriteLine("Виконую програму через створення нового масиву");
             int n = array.Length;
@@ -78,11 +77,10 @@ namespace Lab3
             array = result_array;
             Console.WriteLine("Кінцевий масив:");
             OneDimensionalArray.PrintArray(array);
-            return array;
         }
         //14. Додати рядок після рядка, що містить мінімальний елемент (якщо у різних місцях є кілька елементів з
         //однаковим мінімальним значенням, то брати останній з них)
-        public static void FindMinElement(ref int[][] jagged)
+        public static void Block_2_Task_14(ref int[][] jagged)
         {
             Console.WriteLine(
             """
@@ -98,7 +96,7 @@ namespace Lab3
             {
                 for (int j = 0; j < jagged[i].Length; j++)
                 {
-                    if (min > jagged[i][j])
+                    if (min >= jagged[i][j])
                     {
                         min = jagged[i][j];
                         index = i;
@@ -118,7 +116,7 @@ namespace Lab3
             {
                 jagged[j+1] = jagged[j];
             }
-            jagged[index + 1] = new int[3];
+            jagged[index + 1] = new int[jagged[index].Length];
         }
     }
 }

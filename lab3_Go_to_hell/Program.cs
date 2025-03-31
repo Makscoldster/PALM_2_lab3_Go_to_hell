@@ -1,11 +1,4 @@
 using Lab3;
-using lab3_Go_to_hell;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab3_Go_to_hell
 {
@@ -35,7 +28,6 @@ namespace lab3_Go_to_hell
             int[] array = null!;
             do
             {
-                //bool create = true;
                 Console.WriteLine(
                     """
                     ------------------------------------------------------------------------------------------------------------------------
@@ -54,45 +46,45 @@ namespace lab3_Go_to_hell
 
                 byte choiceBlock = Choice(6);
                 if (choiceBlock == 0) return;
-                if (choiceBlock < 4 && array == null)
+                if (choiceBlock <= 3 && array == null)
                 {
                     array = OneDimensionalArray.Input();
                 }
-                else if (choiceBlock > 3 && jagged == null)
+                else if (choiceBlock >= 4 && jagged == null)
                 {
                     jagged = JaggedArray.Input();
                 }
                 else if (wantNewMatrix)
                 {
-                    if (choiceBlock < 4) array = OneDimensionalArray.Input();
+                    if (choiceBlock <= 3) array = OneDimensionalArray.Input();
                     else jagged = JaggedArray.Input();
                 }
 
                 switch (choiceBlock)
                 {
                     case 1:
-                        MakscoldSolution.Block_1_Taks_15(ref array);
+                        MakscoldSolution.Block_1_Task_15(ref array);
                         break;
                     case 2:
-                        array = MariiaSolution.Menu(array);
+                        MariiaSolution.Block_1_Task_8(ref array);
                         break;
                     case 3:
-                        Jenlast_Solution.InsertElements(array);
+                        Jenlast_Solution.Block_1_Task_12(ref array);
                         break;
                     case 4:
                         MakscoldSolution.Block_2_Taks_15(ref jagged);
                         break;
                     case 5:
-                        MariiaSolution.FindMinElement(ref jagged);
+                        MariiaSolution.Block_2_Task_14(ref jagged);
                         break;
                     case 6:
-                        Jenlast_Solution.DeleteRowsFromK1ToK2(jagged);
+                        Jenlast_Solution.Block_2_Task_4(jagged);
                         break;
                     default:
                         ShowProblemMessage();
                         break;
                 }
-                if (choiceBlock<4) wantNewMatrix = array.Length == 0 || AskForNewMatrix();
+                if (choiceBlock <= 3) wantNewMatrix = array.Length == 0 || AskForNewMatrix();
                 else wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
             } while (true);
         }
@@ -102,7 +94,7 @@ namespace lab3_Go_to_hell
                 """
                 Ввести нову матрицю?
                 1) Так
-                Other) Ні
+                2) Ні
                 """);
 
             try
@@ -110,7 +102,7 @@ namespace lab3_Go_to_hell
                 byte input = byte.Parse(Console.ReadLine()!);
                 return input == 1;
             }
-            catch 
+            catch
             {
                 ShowProblemMessage();
                 return false;
