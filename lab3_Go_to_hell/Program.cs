@@ -78,7 +78,7 @@ namespace lab3_Go_to_hell
                         MariiaSolution.Block_2_Task_14(ref jagged);
                         break;
                     case 6:
-                        Jenlast_Solution.Block_2_Task_4(jagged);
+                        Jenlast_Solution.Block_2_Task_4(ref jagged);
                         break;
                     default:
                         ShowProblemMessage();

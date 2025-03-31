@@ -12,6 +12,7 @@ namespace Lab3
     {
         public static void Block_1_Task_12(ref int[] array)
         {
+            // boba
             Console.WriteLine(
             """
             ------------------------------------------------------------------------------------------------------------------------
@@ -66,7 +67,7 @@ namespace Lab3
             Console.WriteLine("Кінцевий масив:");
             OneDimensionalArray.PrintArray(array);
         }
-        public static void Block_2_Task_4(int[][] jagged)
+        public static void Block_2_Task_4(ref int[][] jagged)
         {
             Console.WriteLine(
             """
@@ -79,24 +80,20 @@ namespace Lab3
             JaggedArray.PrintJagged(jagged);
 
             int k1, k2;
-            do
+
+            Console.WriteLine("Введіть номер рядка починаючи з якого рядки будуть знищуватись (рахунок починається з 0): ");
+            k1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введіть номер рядка до якого будуть видалятись рядки (рахунок починається з 0): ");
+            k2 = int.Parse(Console.ReadLine());
+
+            if (k1 < 0)
             {
-                Console.Write("Введіть номер рядка починаючи з якого рядки будуть знищуватись (рахунок починається з 0): ");
-                k1 = int.Parse(Console.ReadLine());
-                Console.Write("Введіть номер рядка до якого будуть видалятись рядки (рахунок починається з 0): ");
-                k2 = int.Parse(Console.ReadLine());
-
-                if (k1 < 0 || k1 > jagged.Length - 1)
-                {
-                    Program.ShowProblemMessage();
-                }
-                else if (k2 < 0 || k2 > jagged.Length - 1)
-                {
-                    Console.WriteLine("Некоректно введено номер другого рядка");
-                }
-                else break;
-
-            } while (true);
+                k1 = 0;
+            }
+            if (k2 > jagged.Length - 1)
+            {
+                k2 = jagged.Length - 1;
+            }
 
             int[][] newjagged;
             if (Math.Min(k1, k2) + 1 == Math.Max(k1,k2))
@@ -107,9 +104,10 @@ namespace Lab3
             {
                 newjagged = NewJaggedArray(jagged, k1, k2);
             }
+            jagged = newjagged;
 
             Console.WriteLine("Кінцевий масив:");
-            JaggedArray.PrintJagged(newjagged);
+            JaggedArray.PrintJagged(jagged);
         }
         static int[][] Exclusion(int[][] jagged, int k1, int k2)
         {
@@ -133,9 +131,9 @@ namespace Lab3
         static int[][] NewJaggedArray(int[][] jagged, int k1, int k2)
         {
             // розраховуємо кількість рядків, які треба видалити
-            int start = Math.Min(k1, k2) + 1;
+            int start = Math.Min(k1, k2);
             int end = Math.Max(k1, k2);
-            int cnt = end - start;
+            int cnt = end - start + 1;
 
             // створюємо масив в якому будуть індекси рядків, які будуть видалятись
             int[] rowsIndexes = new int[cnt];

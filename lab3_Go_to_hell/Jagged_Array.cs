@@ -32,7 +32,6 @@ namespace lab3_Go_to_hell
                 Console.WriteLine();
             }
         }
-
         public static int[][] Input()
         {
             Console.WriteLine(
