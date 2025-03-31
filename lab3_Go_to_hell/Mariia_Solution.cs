@@ -93,6 +93,7 @@ namespace Lab3
             Console.WriteLine("Початковий масив:");
             JaggedArray.PrintJagged(jagged);
             int min = jagged[0][0];
+            int index = 0;
             for (int i = 0; i < jagged.Length; i++)
             {
                 for (int j = 0; j < jagged[i].Length; j++)
@@ -100,38 +101,24 @@ namespace Lab3
                     if (min > jagged[i][j])
                     {
                         min = jagged[i][j];
+                        index = i;
                     }
                 }
             }
-            AddRows(ref jagged, min);
+            Console.WriteLine($"Мінімальний елемент {min} в {index+ 1} рядку.");
+            AddRow(ref jagged, index);
             Console.WriteLine("Результат виконання програми:");
             JaggedArray.PrintJagged(jagged);
         }
-        static void AddRows(ref int[][] jagged, int min)
+        static void AddRow(ref int[][] jagged, int index)
         {
-            bool containsMin = false;
             int n = jagged.Length+1;
             Array.Resize(ref jagged, n);
-            for (int i = 0; i < n-1; i++)
+            for (int j = n - 2; j > index; j--)
             {
-                for (int j = 0; j < jagged[i].Length; j++)
-                {
-                    if (min == jagged[i][j])
-                    {
-                        containsMin = true;
-                        break;
-                    }
-                }
-                if (containsMin)
-                {
-                    for (int j = n - 2; j > i; j--)
-                    {
-                        jagged[j+1] = jagged[j];
-                        JaggedArray.PrintJagged(jagged);
-                    }
-                    jagged[i] = new int[]{ 0, 0, 0 };
-                }
+                jagged[j+1] = jagged[j];
             }
+            jagged[index + 1] = new int[3];
         }
     }
 }
