@@ -73,6 +73,32 @@ namespace lab3_Go_to_hell
 
 
 
+                switch (choiceBlock)
+                {
+                    case 1:
+                        MakscoldSolution.ZeroAfterEven(ref array);
+                        break;
+                    case 2:
+                        array = MariiaSolution.Menu(array);
+                        break;
+                    case 3:
+                        //Jenlast_Solution.InsertElements(array);
+                        break;
+                    case 4:
+                        MakscoldSolution.Splitline(ref jagged);
+                        break;
+                    case 5:
+                        MariiaSolution.FindMinElement(ref jagged);
+                        break;
+                    case 6:
+                        //Jenlast_Solution.InsertElements(jagged);
+                        break;
+                    default:
+                        ShowProblemMessage();
+                        break;
+                }
+                if (choiceBlock<4) wantNewMatrix = array.Length == 0 || AskForNewMatrix();
+                else wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
             } while (true);
 
         }
