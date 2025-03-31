@@ -25,12 +25,12 @@ namespace Lab3
 
             int[][] result = new int[jagged.Length][];
 
-            Array.Copy(jagged[0], 0, firstPart, 0, splitIndex);
-            Array.Copy(jagged[0], splitIndex, secondPart, 0, firstLineLength - splitIndex);
+            //Array.Copy(jagged[0], 0, firstPart, 0, splitIndex);
+            //Array.Copy(jagged[0], splitIndex, secondPart, 0, firstLineLength - splitIndex);
 
-            int[][] result = new int[jagged.Length + 1][];
-            result[0] = firstPart;
-            result[1] = secondPart;
+            //int[][] result = new int[jagged.Length + 1][];
+            //result[0] = firstPart;
+            //result[1] = secondPart;
 
             for (int i = 1; i < jagged.Length; i++)
             {

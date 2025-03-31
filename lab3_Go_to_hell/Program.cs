@@ -77,7 +77,7 @@ namespace lab3_Go_to_hell
                         array = MariiaSolution.Menu(array);
                         break;
                     case 3:
-                        //Jenlast_Solution.InsertElements(array);
+                        Jenlast_Solution.InsertElements(array);
                         break;
                     case 4:
                         MakscoldSolution.SplitLine(ref jagged);
@@ -86,7 +86,7 @@ namespace lab3_Go_to_hell
                         MariiaSolution.FindMinElement(ref jagged);
                         break;
                     case 6:
-                        //Jenlast_Solution.InsertElements(jagged);
+                        Jenlast_Solution.DeleteRowsFromK1ToK2(jagged);
                         break;
                     default:
                         ShowProblemMessage();
