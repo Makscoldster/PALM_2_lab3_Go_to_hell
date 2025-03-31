@@ -6,6 +6,7 @@ namespace lab3_Go_to_hell
 {
     internal class OneDimensionalArray
     {
+        private static readonly char[] Separators = [ ' ', '\t' ];
         public static void PrintArray(int[] array)
         {
             Console.WriteLine(String.Join(' ', array));
@@ -13,14 +14,19 @@ namespace lab3_Go_to_hell
 
         public static int[] Input()
         {
-            Console.WriteLine("Виберіть спосіб заповнення:\n" +
-                              "1) Через пробіли або табуляції \n" +
-                              "2) Випадково з заданими межами рандому\n" +
-                              "3) З файлу input.txt\n" +
-                              "0) Вийти з програми");
+            Console.WriteLine(
+                """
+                ------------------------------------------------------------------------------------------------------------------------
+                                                                ВИБІР СПОСОБУ ЗАПОВНЕННЯ
+                ------------------------------------------------------------------------------------------------------------------------
+                1) Через пробіли або табуляції
+                2) Випадково з задянням меж рандому
+                3) З файлу Intup.txt
+                0) Вийти з програми
+                """);
 
             byte ChoiceMethod = Program.Choice(3);
-            int[] array = null;
+            int[] array = null!;
 
             switch (ChoiceMethod)
             {
@@ -43,7 +49,7 @@ namespace lab3_Go_to_hell
         static int[] InputInSingleLine()
         {
             Console.WriteLine("Введіть елементи масиву через пробіл або табуляцію:");
-            return Array.ConvertAll(Console.ReadLine()!.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+            return Array.ConvertAll(Console.ReadLine()!.Split(Separators, StringSplitOptions.RemoveEmptyEntries), int.Parse);
         }
 
         static int[] InputRandomly()
@@ -64,8 +70,8 @@ namespace lab3_Go_to_hell
                     Console.WriteLine("Мінімальна межа не може бути більшою за максимальну. Спробуйте знову.");
 
             } while (minRange > maxRange);
-
-            Random rndGen = new Random();
+            
+            Random rndGen = new();
             int[] array = new int[length];
             for (int i = 0; i < length; i++)
                 array[i] = rndGen.Next(minRange, maxRange + 1);
@@ -78,12 +84,15 @@ namespace lab3_Go_to_hell
             try
             {
                 string line = File.ReadAllText("input.txt");
-                return Array.ConvertAll(line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                return Array.ConvertAll(line.Split(Separators, StringSplitOptions.RemoveEmptyEntries), int.Parse);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Помилка при читанні файлу: " + ex.Message);
-                return new int[0];
+                //return new int[0];
+                #pragma warning disable IDE0301
+                return Array.Empty<int>();
+                #pragma warning restore IDE0301
             }
         }
     }
