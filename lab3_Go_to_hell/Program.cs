@@ -71,7 +71,7 @@ namespace lab3_Go_to_hell
                 switch (choiceBlock)
                 {
                     case 1:
-                        MakscoldSolution.ZeroAfterEven(ref array);
+                        MakscoldSolution.Block_1_Taks_15(ref array);
                         break;
                     case 2:
                         array = MariiaSolution.Menu(array);
@@ -80,7 +80,7 @@ namespace lab3_Go_to_hell
                         //Jenlast_Solution.InsertElements(array);
                         break;
                     case 4:
-                        MakscoldSolution.SplitLine(ref jagged);
+                        MakscoldSolution.Block_2_Taks_15(ref jagged);
                         break;
                     case 5:
                         MariiaSolution.FindMinElement(ref jagged);
