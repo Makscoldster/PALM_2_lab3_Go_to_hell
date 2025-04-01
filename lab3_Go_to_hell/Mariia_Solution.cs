@@ -46,7 +46,7 @@ namespace Lab3
                         Program.Main();
                         break;
                     default:
-                        Console.WriteLine("Команда ''{0}'' не розпізнана. Зробіть, будь ласка, вибір із 1, 2, 0.", choice);
+                        Program.ShowProblemMessage();
                         break;
                 }
             } while (choice != 0);

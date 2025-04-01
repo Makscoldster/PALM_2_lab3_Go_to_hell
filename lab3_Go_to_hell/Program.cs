@@ -72,7 +72,7 @@ namespace lab3_Go_to_hell
                         Jenlast_Solution.Block_1_Task_12(ref array);
                         break;
                     case 4:
-                        MakscoldSolution.Block_2_Taks_15(ref jagged);
+                        MakscoldSolution.Block_2_Task_15(ref jagged);
                         break;
                     case 5:
                         MariiaSolution.Block_2_Task_14(ref jagged);

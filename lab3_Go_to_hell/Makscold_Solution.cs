@@ -10,7 +10,7 @@ namespace Lab3
 {
     public static class MakscoldSolution
     {//15. Розбити перший рядок (при довжині >10 символів) на 2 (1-й коротший, якщо довжина непарна). Зсунути решту рядків вниз.
-        public static void Block_2_Taks_15(ref int[][] jagged)
+        public static void Block_2_Task_15(ref int[][] jagged)
         {
             Console.WriteLine(
             """
