@@ -1,75 +1,115 @@
-﻿using Lab3;
 
-namespace lab3_Go_to_hell
+
+
+namespace Lab3
 {
+    using System.Linq;
+    using System;
     internal class Program
     {
-        static int[][] Input()
+        public static byte Choice(byte countOfBlocks = 4)
         {
-            Console.WriteLine("Введіть кількість масивів");
-            int n = int.Parse(Console.ReadLine());
-
-            int[][] stack = new int[n][];
-
-            for (int i = 0; i < n; i++)
-            {
-                Console.WriteLine($"Введіть елементи масиву номер {i + 1} через пробіл");
-                stack[i] = Array.ConvertAll(Console.ReadLine().Trim().Split(), int.Parse);
-            }
-            return stack;
-        }
-        static byte Choice()
-        {
-            Console.WriteLine("Виберіть умову завдання:\n" +
-                              "1) \n" +
-                              "2) \n" +
-                              "3) \n" +
-                              "0) Вийти з програми");
-
             byte choice;
-            byte countOfBlocks = 4;
             do
             {
                 try
                 {
-                    choice = byte.Parse(Console.ReadLine());
+                    choice = byte.Parse(Console.ReadLine()!);
                     if (choice <= countOfBlocks) return choice;
-                    Problem();
+                    ShowProblemMessage();
                 }
-                catch { Problem(); }
+                catch { ShowProblemMessage(); }
             } while (true);
         }
-        static void Problem() => Console.WriteLine("Спробуйте ще раз");
-        static void Main(string[] args)
+        public static void ShowProblemMessage() => Console.WriteLine("Спробуйте ще раз");
+        public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
+            bool wantNewMatrix = true;
+            int[][] jagged = null!;
+            int[] array = null!;
             do
             {
-                //bool create = true;
+                Console.WriteLine(
+                    """
+                    ------------------------------------------------------------------------------------------------------------------------
+                                                                         ВИБІР ЗАВДАННЯ
+                    ------------------------------------------------------------------------------------------------------------------------
+                    БЛОК #1:
+                    1) Вставити після кожного парного елемента елемент із значенням 0
+                    2) Знищити всі елементи з непарними індексами
+                    3) Вставити К елементів, починаючи з номеру T
+                    БЛОК #2:
+                    4) Розбити перший рядок (при довжині >10 символів) на 2 (1-й коротший, якщо довжина непарна). Зсунути решту рядків вниз.
+                    5) Вставити рядок після останнього рядка з мінімальним елементом.
+                    6) Видалити рядки з К1 до К2 (або всі можливі, якщо К1/К2 недійсні).
+                    0) Вийти з програми
+                    """);
 
-                byte choice = Choice();
-                if (choice == 0) return;
-
-                int[][] jagged = Input();
-
-                Action action = choice switch
+                byte choiceBlock = Choice(6);
+                if (choiceBlock == 0) return;
+                if (choiceBlock <= 3 && array == null)
                 {
-                    1 => () => MakscoldSolution.Foo(jagged),
-                    2 => () => Problem(),
-                    3 => () => Problem(),
-                    _ => () => Problem(),
-                };
-                action();
+                    array = OneDimensionalArray.Input();
+                }
+                else if (choiceBlock >= 4 && jagged == null)
+                {
+                    jagged = JaggedArray.Input();
+                }
+                else if (wantNewMatrix)
+                {
+                    if (choiceBlock <= 3) array = OneDimensionalArray.Input();
+                    else jagged = JaggedArray.Input();
+                }
 
-                //Console.WriteLine("Ввести нову матрицю?\n" +
-                //                  "1) Так\n" +
-                //                  "Other) Ні");
-
-
-
+                switch (choiceBlock)
+                {
+                    case 1:
+                        MakscoldSolution.Block_1_Task_15(ref array);
+                        break;
+                    case 2:
+                        MariiaSolution.Block_1_Task_8(ref array);
+                        break;
+                    case 3:
+                        Jenlast_Solution.Block_1_Task_12(ref array);
+                        break;
+                    case 4:
+                        MakscoldSolution.Block_2_Task_15(ref jagged);
+                        break;
+                    case 5:
+                        MariiaSolution.Block_2_Task_14(ref jagged);
+                        break;
+                    case 6:
+                        Jenlast_Solution.Block_2_Task_4(ref jagged);
+                        break;
+                    default:
+                        ShowProblemMessage();
+                        break;
+                }
+                if (choiceBlock <= 3) wantNewMatrix = array.Length == 0 || AskForNewMatrix();
+                else wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
             } while (true);
+        }
+        static bool AskForNewMatrix()
+        {
+            Console.WriteLine(
+                """
+                Ввести нову матрицю?
+                1) Так
+                2) Ні
+                """);
 
+            try
+            {
+                byte input = byte.Parse(Console.ReadLine()!);
+                return input == 1;
+            }
+            catch
+            {
+                ShowProblemMessage();
+                return false;
+            }
         }
     }
 }
