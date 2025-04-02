@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+!Lab3/lab3_Go_to_hell/bin/Debug/net9.0/input_array.txt
+!Lab3/lab3_Go_to_hell/bin/Debug/net9.0/input_jagged.txt
