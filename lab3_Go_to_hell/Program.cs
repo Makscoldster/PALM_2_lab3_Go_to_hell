@@ -1,7 +1,10 @@
-using Lab3;
 
-namespace lab3_Go_to_hell
+
+
+namespace Lab3
 {
+    using System.Linq;
+    using System;
     internal class Program
     {
         public static byte Choice(byte countOfBlocks = 4)
