@@ -38,10 +38,10 @@ namespace Lab3
                 {
                     case 1:
                         ArrayResizeMethod(ref array);
-                        break;
+                        return;
                     case 2:
                         CreateNewArrayMethod(ref array);
-                        break;
+                        return;
                     case 0:
                         Program.Main();
                         break;

@@ -21,7 +21,7 @@ namespace lab3_Go_to_hell
                 ------------------------------------------------------------------------------------------------------------------------
                 1) Через пробіли або табуляції
                 2) Випадково з задянням меж рандому
-                3) З файлу Intup.txt
+                3) З файлу input_array.txt
                 0) Вийти з програми
                 """);
 
@@ -83,7 +83,7 @@ namespace lab3_Go_to_hell
         {
             try
             {
-                string line = File.ReadAllText("input.txt");
+                string line = File.ReadAllText("input_array.txt");
                 return Array.ConvertAll(line.Split(Separators, StringSplitOptions.RemoveEmptyEntries), int.Parse);
             }
             catch (Exception ex)

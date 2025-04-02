@@ -41,7 +41,7 @@ namespace lab3_Go_to_hell
                 ------------------------------------------------------------------------------------------------------------------------
                 1) Через пробіли або табуляції
                 2) Випадково з задянням меж рандому
-                3) З файлу Intup.txt
+                3) З файлу input_jagged.txt
                 0) Вийти з програми
                 """);
 
@@ -132,7 +132,7 @@ namespace lab3_Go_to_hell
             static int[][] InputFromFile()
             {
                 List<int[]> jaggedList = new List<int[]>();
-                StreamReader file = new StreamReader("input.txt");
+                StreamReader file = new StreamReader("input_jagged.txt");
                 string line;
                 while ((line = file.ReadLine()) != null)
                 {
