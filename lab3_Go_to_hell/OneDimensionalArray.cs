@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.IO;
 
-namespace lab3_Go_to_hell
+namespace Lab3
 {
     internal class OneDimensionalArray
     {

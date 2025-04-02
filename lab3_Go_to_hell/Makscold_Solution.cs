@@ -1,10 +1,4 @@
-﻿using lab3_Go_to_hell;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Lab3
 {

@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using lab3_Go_to_hell;
 
 namespace Lab3
 {
+    
     internal class Jenlast_Solution
     {
         public static void Block_1_Task_12(ref int[] array)
