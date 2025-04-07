@@ -52,6 +52,7 @@ namespace Lab3
             {
                 array[j++] = array[i];
             }
+            if (j == 1) j = 0;
             Array.Resize(ref array, j);
             Console.WriteLine("Результат виконання програми:");
             OneDimensionalArray.PrintArray(array);
@@ -108,7 +109,8 @@ namespace Lab3
             {
                 jagged[j+1] = jagged[j];
             }
-            jagged[index + 1] = new int[jagged[index].Length];
+            Console.WriteLine("Введіть елементи, які хочете додати, через пробіл:");
+            jagged[index + 1] = Array.ConvertAll(Console.ReadLine()!.Split(OneDimensionalArray.Separators, StringSplitOptions.RemoveEmptyEntries), int.Parse);
         }
     }
 }

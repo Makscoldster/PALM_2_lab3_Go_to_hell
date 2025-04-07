@@ -4,9 +4,9 @@ using System.IO;
 
 namespace Lab3
 {
-    internal class OneDimensionalArray
+    public static class OneDimensionalArray
     {
-        private static readonly char[] Separators = [ ' ', '\t' ];
+        public static readonly char[] Separators = [ ' ', '\t' ];
         public static void PrintArray(int[] array)
         {
             Console.WriteLine(String.Join(' ', array));
@@ -22,7 +22,7 @@ namespace Lab3
                 1) Через пробіли або табуляції
                 2) Випадково з задянням меж рандому
                 3) З файлу input_array.txt
-                0) Вийти з програми
+                0) Повернутися в меню
                 """);
 
             byte ChoiceMethod = Program.Choice(3);
@@ -39,6 +39,9 @@ namespace Lab3
                 case 3:
                     array = InputFromFile();
                     break;
+                case 0:
+                    Program.Main();
+                    break;
                 default:
                     Program.ShowProblemMessage();
                     break;
@@ -54,8 +57,18 @@ namespace Lab3
 
         static int[] InputRandomly()
         {
-            Console.WriteLine("Вкажіть кількість елементів у масиві:");
-            int length = int.Parse(Console.ReadLine()!);
+            uint length;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Вкажіть кількість елементів у масиві:");
+                    length = uint.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch { Program.ShowProblemMessage(); }
+            }
+            while (true);
 
             int minRange, maxRange;
             do
@@ -71,7 +84,7 @@ namespace Lab3
 
             } while (minRange > maxRange);
             
-            Random rndGen = new();
+            Random rndGen = new Random();
             int[] array = new int[length];
             for (int i = 0; i < length; i++)
                 array[i] = rndGen.Next(minRange, maxRange + 1);

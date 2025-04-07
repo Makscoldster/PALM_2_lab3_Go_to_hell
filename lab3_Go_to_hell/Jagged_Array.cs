@@ -10,7 +10,7 @@ namespace Lab3
         {
             int maxLength = 0;
             int n = jagged.Length;
-            int m = 0;
+            int m;
             for (int i = 0; i < n; ++i)
             {
                 m = jagged[i].Length;
@@ -39,28 +39,29 @@ namespace Lab3
                 1) Через пробіли або табуляції
                 2) Випадково з задянням меж рандому
                 3) З файлу input_jagged.txt
-                0) Вийти з програми
+                0) Повернутися в меню
                 """);
 
 
             byte ChoiceMethod = Program.Choice(3);
             uint n = 0;
-            if (ChoiceMethod != 3)
+            if (ChoiceMethod == 1 || ChoiceMethod == 2)
             {
                 do
                 {
                     try
                     {
                         Console.WriteLine("Введіть кількість підмасивів");
-                        n = uint.Parse(Console.ReadLine());
-                        break;
+                        n = uint.Parse(Console.ReadLine()!);
+                        if (n==0) Program.ShowProblemMessage();
+                        else break;
                     }
                     catch { Program.ShowProblemMessage(); }
                 }
                 while (true);
             }
 
-            int[][] jagged = null;
+            int[][] jagged = null!;
 
             switch (ChoiceMethod)
             {
@@ -72,6 +73,9 @@ namespace Lab3
                     break;
                 case 3:
                     jagged = InputFromFile();
+                    break;
+                case 0:
+                    Program.Main();
                     break;
                 default:
                     Program.ShowProblemMessage();
@@ -86,25 +90,42 @@ namespace Lab3
                 for (int i = 0; i < n; i++)
                 {
                     Console.WriteLine($"Введіть елементи масиву номер {i + 1}");
-                    jagged[i] = Array.ConvertAll(Console.ReadLine().Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                    jagged[i] = Array.ConvertAll(Console.ReadLine()!.Split(OneDimensionalArray.Separators, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                    if (jagged[i].Length == 0)
+                    {
+                        Program.ShowProblemMessage();
+                        i--;
+                    }
+
                 }
                 return jagged;
             }
 
             static int[][] InputRamdomly(uint n)
             {
-                Console.WriteLine("Вкажіть кількість елементів у всіх підмасивах");
-                uint length = uint.Parse(Console.ReadLine());
-
+                uint length = 0;
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine("Вкажіть кількість елементів у всіх підмасивах");
+                        length = uint.Parse(Console.ReadLine()!);
+                        if (length == 0) Program.ShowProblemMessage();
+                        else break;
+                    }
+                    catch { Program.ShowProblemMessage(); }
+                }
+                while (true);
+;
                 int minRange;
                 int maxRange;
                 do
                 {
                     Console.WriteLine("Введіть мінімальну межу рандому:");
-                    minRange = int.Parse(Console.ReadLine());
+                    minRange = int.Parse(Console.ReadLine()!);
 
                     Console.WriteLine("Введіть максимальну межу рандому:");
-                    maxRange = int.Parse(Console.ReadLine());
+                    maxRange = int.Parse(Console.ReadLine()!);
 
                     if (minRange > maxRange)
                         Console.WriteLine("Мінімальна межа не може бути більшою за максимальну. Спробуйте знову.");
@@ -131,15 +152,20 @@ namespace Lab3
                 List<int[]> jaggedList = new List<int[]>();
                 StreamReader file = new StreamReader("input_jagged.txt");
                 string line;
-                while ((line = file.ReadLine()) != null)
+                while ((line = file.ReadLine()!) != null)
                 {
-                    int[] row = Array.ConvertAll(line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                    int[] row = Array.ConvertAll(line.Split(OneDimensionalArray.Separators, StringSplitOptions.RemoveEmptyEntries), int.Parse);
                     jaggedList.Add(row);
                 }
                 int[][] jagged = new int[jaggedList.Count][];
                 for (int i = 0; i < jaggedList.Count; i++)
                 {
                     jagged[i] = jaggedList[i];
+                }
+                if (jagged.Length == 0)
+                {
+                    Console.WriteLine("Помилка! Масив пустий.");
+                    Input();
                 }
                 return jagged;
             }
