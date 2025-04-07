@@ -19,21 +19,21 @@ namespace Lab3
             Console.WriteLine("Початковий масив:");
             OneDimensionalArray.PrintArray(array);
 
-            int k, t;
+            int k = 0, t;
             do
             {
                 Console.Write("Введіть кількість елементів яку потрібно вставити в масив: ");
-                k = int.Parse(Console.ReadLine());
+                k = int.Parse(Console.ReadLine()!);
+                if (k < 1) Program.ShowProblemMessage();
+            }
+            while (k < 1);
+            do
+            {
                 Console.Write("Введіть номер елементу починаючи з якого будуть вставлятись елементи (рахунок починається з 0): ");
-                t = int.Parse(Console.ReadLine());
-
-                if (t < 0 || t >= array.Length)
-                {
-                    Program.ShowProblemMessage();
-                }
-                else break;
-
-            } while (true);
+                t = int.Parse(Console.ReadLine()!);
+                if (t < 0 || t > array.Length) Program.ShowProblemMessage();
+            }
+            while (t < 0 || t > array.Length);
 
             Array.Resize(ref array, array.Length + k);
 
@@ -45,8 +45,8 @@ namespace Lab3
             string[] new_nums;
             do
             {
-                Console.Write($"Введіть нові елементи, які додадуться до масиву після {t} елементу: ");
-                new_nums = Console.ReadLine().Split();
+                Console.Write($"Введіть нові елементи, які додадуться до масиву з {t} елементу: ");
+                new_nums = Console.ReadLine()!.Split();
                 if (new_nums.Length > k)
                 {
                     Console.WriteLine("Значення кількості елементів, які потрібно вставити та сама кількість елементів не співпадають, спробуйте ще раз.");
@@ -57,7 +57,7 @@ namespace Lab3
 
             for (int i = 0; i < k; i++)
             {
-                array[t + i + 1] = int.Parse(new_nums[i]);
+                array[t + i] = int.Parse(new_nums[i]);
             }
 
             Console.WriteLine("Кінцевий масив:");
@@ -78,9 +78,9 @@ namespace Lab3
             int k1, k2;
 
             Console.WriteLine("Введіть номер рядка починаючи з якого рядки будуть знищуватись (рахунок починається з 0): ");
-            k1 = int.Parse(Console.ReadLine());
+            k1 = int.Parse(Console.ReadLine()!);
             Console.WriteLine("Введіть номер рядка до якого будуть видалятись рядки (рахунок починається з 0): ");
-            k2 = int.Parse(Console.ReadLine());
+            k2 = int.Parse(Console.ReadLine()!);
 
             if (k1 < 0)
             {

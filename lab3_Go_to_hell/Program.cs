@@ -88,7 +88,7 @@ namespace Lab3
                         break;
                 }
                 if (choiceBlock <= 3) wantNewMatrix = array.Length == 0 || AskForNewMatrix();
-                else wantNewMatrix = jagged.Length == 0 || AskForNewMatrix();
+                else wantNewMatrix = AskForNewMatrix();
             } while (true);
         }
         static bool AskForNewMatrix()
