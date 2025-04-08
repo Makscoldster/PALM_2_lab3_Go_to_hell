@@ -125,10 +125,7 @@ namespace Lab3
                 k2 = jagged.Length - 1;
             }
 
-            int[][] newjagged;
-            newjagged = NewJaggedArray(jagged, k1, k2);
-
-            jagged = newjagged;
+            jagged = NewJaggedArray(jagged, k1, k2);
 
             Console.WriteLine("Кінцевий масив:");
             JaggedArray.PrintJagged(jagged);
