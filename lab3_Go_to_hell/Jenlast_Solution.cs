@@ -22,14 +22,30 @@ namespace Lab3
             int k = 0, t;
             do
             {
-                Console.Write("Введіть кількість елементів яку потрібно вставити в масив: ");
+                Console.WriteLine("Введіть кількість елементів яку потрібно вставити в масив: ");
                 k = int.Parse(Console.ReadLine()!);
-                if (k < 1) Program.ShowProblemMessage();
+                if (k < 0) Program.ShowProblemMessage();
             }
-            while (k < 1);
+            while (k < 0);
+            
+            if ((array.Length == 0 || array.Length == 1 ) && k != 0)
+            {
+                array = ZeroArray(array, k);
+            }
+            else if (array.Length != 0 && k != 0)
+            {
+                array = NormalArray(array, k);
+            }
+
+            Console.WriteLine("Кінцевий масив:");
+            OneDimensionalArray.PrintArray(array);
+        }
+        public static int[] NormalArray(int[] array, int k)
+        {
+            int t;
             do
             {
-                Console.Write("Введіть номер елементу починаючи з якого будуть вставлятись елементи (рахунок починається з 0): ");
+                Console.WriteLine("Введіть номер елементу починаючи з якого будуть вставлятись елементи: ");
                 t = int.Parse(Console.ReadLine()!);
                 if (t < 0 || t > array.Length) Program.ShowProblemMessage();
             }
@@ -45,7 +61,7 @@ namespace Lab3
             string[] new_nums;
             do
             {
-                Console.Write($"Введіть нові елементи, які додадуться до масиву з {t} елементу: ");
+                Console.WriteLine($"Введіть нові елементи, які додадуться до масиву з {t} елементу: ");
                 new_nums = Console.ReadLine()!.Split();
                 if (new_nums.Length > k)
                 {
@@ -60,8 +76,26 @@ namespace Lab3
                 array[t + i] = int.Parse(new_nums[i]);
             }
 
-            Console.WriteLine("Кінцевий масив:");
-            OneDimensionalArray.PrintArray(array);
+            return array;
+        }
+        public static int[] ZeroArray(int[] array, int k)
+        {
+            int[] new_nums;
+            do
+            {
+                Console.WriteLine($"Введіть нові елементи, які додадуться до масиву: ");
+                new_nums = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+                if (new_nums.Length > k)
+                {
+                    Console.WriteLine("Значення кількості елементів, які потрібно вставити та сама кількість елементів не співпадають, спробуйте ще раз.");
+                }
+                else break;
+
+            } while (true);
+
+            array = new_nums;
+
+            return array;
         }
         public static void Block_2_Task_4(ref int[][] jagged)
         {
@@ -91,38 +125,10 @@ namespace Lab3
                 k2 = jagged.Length - 1;
             }
 
-            int[][] newjagged;
-            if (Math.Min(k1, k2) + 1 == Math.Max(k1,k2))
-            {
-                newjagged = Exclusion(jagged, k1, k2);
-            }
-            else
-            {
-                newjagged = NewJaggedArray(jagged, k1, k2);
-            }
-            jagged = newjagged;
+            jagged = NewJaggedArray(jagged, k1, k2);
 
             Console.WriteLine("Кінцевий масив:");
             JaggedArray.PrintJagged(jagged);
-        }
-        static int[][] Exclusion(int[][] jagged, int k1, int k2)
-        {
-            int[] rowsIndexes = new int[2];
-
-            rowsIndexes[0] = Math.Min(k1, k2);
-            rowsIndexes[1] = Math.Max(k1, k2);
-
-            int[][] newjagged = new int[jagged.Length - 2][];
-            int j = 0;
-            for (int i = 0; i < jagged.Length; i++)
-            {
-                if (!rowsIndexes.Contains(i))
-                {
-                    newjagged[j++] = jagged[i];
-                }
-            }
-
-            return newjagged;
         }
         static int[][] NewJaggedArray(int[][] jagged, int k1, int k2)
         {
