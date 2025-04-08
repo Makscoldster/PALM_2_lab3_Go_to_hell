@@ -1,6 +1,3 @@
-
-
-
 namespace Lab3
 {
     using System.Linq;
