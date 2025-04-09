@@ -28,7 +28,7 @@ namespace Lab3
             }
             while (k < 0);
             
-            if ((array.Length == 0 || array.Length == 1 ) && k != 0)
+            if (array.Length == 0 && k != 0)
             {
                 array = ZeroArray(array, k);
             }
@@ -63,7 +63,7 @@ namespace Lab3
             {
                 Console.WriteLine($"Введіть нові елементи, які додадуться до масиву з {t} елементу: ");
                 new_nums = Console.ReadLine()!.Split();
-                if (new_nums.Length > k)
+                if (new_nums.Length != k)
                 {
                     Console.WriteLine("Значення кількості елементів, які потрібно вставити та сама кількість елементів не співпадають, спробуйте ще раз.");
                 }
